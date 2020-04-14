@@ -17,7 +17,7 @@ const exitEditMode = () => {
   });
 };
 
-const YourLayout = ({ pageProps, children }) => {
+const YourLayout = ({ error, children }) => {
   return (
     <TinacmsGithubProvider
       authenticate={() =>
@@ -28,7 +28,7 @@ const YourLayout = ({ pageProps, children }) => {
       }
       enterEditMode={enterEditMode}
       exitEditMode={exitEditMode}
-      error={pageProps.error}
+      error={error}
     >
       {children}
     </TinacmsGithubProvider>
