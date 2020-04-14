@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useForm, usePlugins } from 'tinacms';
 import { InlineForm, InlineTextareaField } from 'react-tinacms-inline';
+import { useGithubErrorListener } from 'react-tinacms-github';
 
 const Home = () => {
   const [, form] = useForm({
@@ -15,6 +16,7 @@ const Home = () => {
   });
 
   usePlugins(form);
+  useGithubErrorListener(form);
 
   return (
     <InlineForm form={form} initialStatus='active'>
