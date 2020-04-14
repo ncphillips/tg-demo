@@ -2,8 +2,11 @@ import Head from 'next/head';
 import { useForm, usePlugins } from 'tinacms';
 import { InlineForm, InlineTextareaField } from 'react-tinacms-inline';
 import { useGithubErrorListener } from 'react-tinacms-github';
+import { EditLink } from '../components/EditLink';
+import { NextPage, GetStaticProps } from 'next';
+import { getJsonFile, GithubError } from 'next-tinacms-github';
 
-const Home = () => {
+const Home: NextPage<{ preview: boolean }> = (props) => {
   const [, form] = useForm({
     id: 'hello',
     initialValues: {
@@ -19,7 +22,10 @@ const Home = () => {
   useGithubErrorListener(form);
 
   return (
-    <InlineForm form={form} initialStatus='active'>
+    <InlineForm
+      form={form}
+      initialStatus={props.preview ? 'active' : 'inactive'}
+    >
       <div className='container'>
         <Head>
           <title>Create Next App</title>
@@ -27,6 +33,7 @@ const Home = () => {
         </Head>
 
         <main>
+          <EditLink isEditing={props.preview} />
           <h1 className='title'>
             <InlineTextareaField name='title' />
           </h1>
@@ -224,3 +231,54 @@ const Home = () => {
 };
 
 export default Home;
+
+export const getStaticProps: GetStaticProps = async function ({
+  preview,
+  previewData,
+  ...ctx
+}) {
+  let file = {};
+  const filePath = `content/home.json`;
+
+  const sourceProviderConnection = {
+    forkFullName: previewData?.fork_full_name || 'ncphillips/tg-demo',
+    headBranch: previewData?.head_branch || 'master',
+  };
+
+  let error = null;
+
+  if (preview) {
+    try {
+      file = await getJsonFile(
+        filePath,
+        sourceProviderConnection,
+        previewData.accessToken
+      );
+    } catch (e) {
+      // If there is an error initially loading the content from Github, we want to display an actionable error
+      // to the user. They may need to re-authenticate or create a new fork.
+      if (e instanceof GithubError) {
+        error = { ...e }; //workaround since we cant return error as JSON
+      } else {
+        throw e;
+      }
+    }
+  } else {
+    // Get your production content here
+    // when you are not in edit-mode
+    file = {
+      sha: '',
+      fileRelativePath: filePath,
+      data: await require(`../${filePath}`),
+    };
+  }
+
+  return {
+    props: {
+      sourceProviderConnection,
+      editMode: !!preview,
+      file,
+      error,
+    },
+  };
+};
