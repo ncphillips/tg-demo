@@ -3,7 +3,7 @@ import App from 'next/app';
 import { TinaProvider, TinaCMS } from 'tinacms';
 import { GithubClient } from 'react-tinacms-github';
 
-const REPO_FULL_NAME = process.env.REPO_FULL_NAME; // e.g: tinacms/tinacms.org
+const REPO_FULL_NAME = 'ncphillips/tg-demo';
 
 import { TinacmsGithubProvider, authenticate } from 'react-tinacms-github';
 
@@ -54,6 +54,7 @@ export default class Site extends App {
 
   render() {
     const { Component, pageProps } = this.props;
+    console.log({ pageProps });
     return (
       <TinaProvider cms={this.cms}>
         <YourLayout {...this.props.pageProps}>
