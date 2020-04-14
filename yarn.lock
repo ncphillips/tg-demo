@@ -883,7 +883,7 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.5.5", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
   version "7.9.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.2.tgz#d90df0583a3a252f09aaa619665367bae518db06"
   integrity sha512-NE2DtOdufG7R5vnfQUTehdTfNycfUANEtCa9PssN9O/xmTzP4E08UI797ixaei6hBEVL9BI/PsdJS5x7mWoB9Q==
@@ -3798,7 +3798,7 @@ prop-types-exact@1.2.0:
     object.assign "^4.1.0"
     reflect.ownkeys "^0.2.0"
 
-prop-types@15.7.2, prop-types@^15.5.10, prop-types@^15.5.7, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.7.2, prop-types@^15.5.10, prop-types@^15.5.7, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -4104,6 +4104,14 @@ react-redux@^7.0.3:
     prop-types "^15.7.2"
     react-is "^16.9.0"
 
+react-textarea-autosize@>=7.1, react-textarea-autosize@^7.1.2:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/react-textarea-autosize/-/react-textarea-autosize-7.1.2.tgz#70fdb333ef86bcca72717e25e623e90c336e2cda"
+  integrity sha512-uH3ORCsCa3C6LHxExExhF4jHoXYCQwE5oECmrRsunlspaDAbS4mGKNlWZqjLfInWtFQcf0o1n1jC/NGXFdUBCg==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+    prop-types "^15.6.0"
+
 react-tinacms-editor@^0.4.1-alpha.2:
   version "0.4.1-alpha.2"
   resolved "https://registry.yarnpkg.com/react-tinacms-editor/-/react-tinacms-editor-0.4.1-alpha.2.tgz#de508e7205791635f164933c4840484649b2ffa5"
@@ -4131,6 +4139,13 @@ react-tinacms-editor@^0.4.1-alpha.2:
     prosemirror-utils "^0.9.6"
     prosemirror-view "^1.11.3"
     react-dismissible "^1.1.5"
+
+react-tinacms-inline@^0.4.5-alpha.2:
+  version "0.4.5-alpha.2"
+  resolved "https://registry.yarnpkg.com/react-tinacms-inline/-/react-tinacms-inline-0.4.5-alpha.2.tgz#799f5b2e1f246d95c27d353c3a169f2f41377f93"
+  integrity sha512-b6l4KCAWIW2ORRe47yHZW8nXjl2EBrrsdt/UZ385oBrN08+nnAB+D9VrwNviw5ixQirKhRDA7yJGTM+TzBujGg==
+  dependencies:
+    react-textarea-autosize ">=7.1"
 
 react@16.13.1:
   version "16.13.1"
