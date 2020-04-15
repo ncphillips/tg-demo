@@ -57,7 +57,7 @@ export default class Site extends App {
     console.log({ pageProps });
     return (
       <TinaProvider cms={this.cms}>
-        <YourLayout {...this.props.pageProps}>
+        <YourLayout error={this.props.pageProps.error}>
           <Component {...pageProps} />
         </YourLayout>
       </TinaProvider>
