@@ -1,6 +1,7 @@
 import Head from 'next/head';
-import { getGithubPreviewProps, parseMarkdown } from 'next-tinacms-github';
+import { getGithubPreviewProps, parseJson } from 'next-tinacms-github';
 import { GetStaticProps } from 'next';
+import { useGithubFileForm, useGithubJsonForm } from 'react-tinacms-github';
 
 export const getStaticProps: GetStaticProps = async function ({
   preview,
@@ -11,7 +12,7 @@ export const getStaticProps: GetStaticProps = async function ({
     return getGithubPreviewProps({
       ...previewData,
       fileRelativePath: 'content/home.json',
-      parse: parseMarkdown,
+      parse: parseJson,
     });
   }
   return {
@@ -27,18 +28,20 @@ export const getStaticProps: GetStaticProps = async function ({
   };
 };
 
-export default function Home() {
+export default function Home(props) {
+  const [page] = useGithubJsonForm(props.file, {
+    fields: [{ name: 'title', component: 'text' }],
+  });
+
   return (
     <div className='container'>
       <Head>
-        <title>Create Next App</title>
+        <title>{page.title}</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <main>
-        <h1 className='title'>
-          Welcome to <a href='https://nextjs.org'>Next.js!</a>
-        </h1>
+        <h1 className='title'>{page.title}</h1>
 
         <p className='description'>
           Get started by editing <code>pages/index.js</code>
