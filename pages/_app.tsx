@@ -19,13 +19,14 @@ export default class Site extends App {
         github: new GithubClient('/api/proxy-github', REPO_FULL_NAME),
       },
       sidebar: {
-        hidden: !props.pageProps.editMode,
+        hidden: !props.pageProps.preview,
       },
       // ... any other tina config
     });
   }
   render() {
     const { Component, pageProps } = this.props;
+    console.log({ pageProps });
     return (
       <TinaProvider cms={this.cms}>
         <YourLayout editMode={pageProps.editMode} error={pageProps.error}>

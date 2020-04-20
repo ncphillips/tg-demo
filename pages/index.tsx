@@ -10,7 +10,7 @@ export const getStaticProps: GetStaticProps = async function ({
   if (preview) {
     return getGithubPreviewProps({
       ...previewData,
-      fileRelativePath: 'src/content/home.json',
+      fileRelativePath: 'content/home.json',
       parse: parseMarkdown,
     });
   }
@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps = async function ({
       error: null,
       preview: false,
       file: {
-        fileRelativePath: 'src/content/home.json',
+        fileRelativePath: 'content/home.json',
         data: (await import('../content/home.json')).default,
       },
     },
