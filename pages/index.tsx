@@ -1,44 +1,71 @@
-import Head from 'next/head'
+import Head from 'next/head';
+import { getGithubPreviewProps, parseMarkdown } from 'next-tinacms-github';
+import { GetStaticProps } from 'next';
+
+export const getStaticProps: GetStaticProps = async function ({
+  preview,
+  previewData,
+  ...ctx
+}) {
+  if (preview) {
+    return getGithubPreviewProps({
+      ...previewData,
+      fileRelativePath: 'src/content/home.json',
+      parse: parseMarkdown,
+    });
+  }
+  return {
+    props: {
+      sourceProvider: null,
+      error: null,
+      preview: false,
+      file: {
+        fileRelativePath: 'src/content/home.json',
+        data: (await import('../content/home.json')).default,
+      },
+    },
+  };
+};
 
 export default function Home() {
   return (
-    <div className="container">
+    <div className='container'>
       <Head>
         <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+        <h1 className='title'>
+          Welcome to <a href='https://nextjs.org'>Next.js!</a>
         </h1>
 
-        <p className="description">
+        <p className='description'>
           Get started by editing <code>pages/index.js</code>
         </p>
 
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
+        <div className='grid'>
+          <a href='https://nextjs.org/docs' className='card'>
             <h3>Documentation &rarr;</h3>
             <p>Find in-depth information about Next.js features and API.</p>
           </a>
 
-          <a href="https://nextjs.org/learn" className="card">
+          <a href='https://nextjs.org/learn' className='card'>
             <h3>Learn &rarr;</h3>
             <p>Learn about Next.js in an interactive course with quizzes!</p>
           </a>
 
           <a
-            href="https://github.com/zeit/next.js/tree/master/examples"
-            className="card"
+            href='https://github.com/zeit/next.js/tree/master/examples'
+            className='card'
           >
             <h3>Examples &rarr;</h3>
             <p>Discover and deploy boilerplate example Next.js projects.</p>
           </a>
 
           <a
-            href="https://zeit.co/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
+            href='https://zeit.co/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
+            className='card'
           >
             <h3>Deploy &rarr;</h3>
             <p>
@@ -50,11 +77,11 @@ export default function Home() {
 
       <footer>
         <a
-          href="https://zeit.co?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          href='https://zeit.co?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
+          target='_blank'
+          rel='noopener noreferrer'
         >
-          Powered by <img src="/zeit.svg" alt="ZEIT Logo" />
+          Powered by <img src='/zeit.svg' alt='ZEIT Logo' />
         </a>
       </footer>
 
@@ -200,5 +227,5 @@ export default function Home() {
         }
       `}</style>
     </div>
-  )
+  );
 }
